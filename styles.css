@@ -1,0 +1,113 @@
+html {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
+li {
+    list-style-type: none;
+}
+
+.tv-guide {
+    margin-left: 20%;
+}
+
+.first-channel,
+.russia-1-channel,
+.sts-channel {
+    /*display: inline-block;*/
+    float: left;
+    margin: 0em 4em 4em 0em;
+}
+
+.first-channel a,
+.russia-1-channel a,
+.sts-channel a {
+    text-align: center;
+    vertical-align: 30%;
+    text-decoration: none;
+}
+
+.first-channel img,
+.russia-1-channel img,
+.sts-channel img {
+    width: 2em;
+    height: 2em;
+    border-radius: 10px;
+}
+
+.first-channel h2,
+.russia-1-channel h2,
+.sts-channel h2 {
+    display: inline-flex;
+}
+
+
+.first-channel:hover,
+.russia-1-channel:hover,
+.sts-channel:hover {
+    background-color: azure;
+}
+
+
+.grid-events time,
+.grid-events h3 {
+    display: inline;
+}
+
+.channel-page-header {
+    float: left;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.channel-page-header a {
+    text-decoration: none;
+}
+
+.channel-page {
+    text-align: center;
+    display: inline-block;
+    margin-top: 5%;
+}
+
+.channel-page img {
+    width: 5%;
+    height: 5%;
+}
+
+.logo-text {
+    float: left;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.logo-text:hover {
+    background-color: azure;
+}
+
+.footer-info {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 30px;
+    width: 100%;
+}
+
+.logo-text a {
+    text-decoration: none;
+}
+
+.input-field {
+    display: flex;
+}
+
+
+.container {
+    display: flex;
+    margin-bottom: 100px;
+}
+
+.image-user img {
+    margin-left: 300px;
+    height: 50px;
+    width: 50px;
+}
