@@ -3,6 +3,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const Schedule = require('./models/Schedule')
 const mongoose = require('mongoose')
 const http = require('http')
+const AdminController = require('./controllers/adminController')
 
 const uri = 'mongodb+srv://psygentelmen014:1234GvOzd123@cluster0.j34hpbs.mongodb.net/?retryWrites=true&w=majority'
 
@@ -123,34 +124,11 @@ app.get('/sts-channel', (req, res) => {
     res.sendFile(__dirname + '/public/static/html/sts-channel.html')
 })
 
-app.post('/addchannel', (req, res) => {
-    //const newChannel = req.body
-    //res.json(req.body)
-    // console.log(newChannel)
-    const newChannel = new Schedule({
-        "dayOfWeek": req.body.dayOfWeek, "channel": req.body.channel,
-        "scheduleTime": req.body.scheduleTime, "scheduleProgram": req.body.scheduleProgram
-    });
-
-    newChannel.save().then((result) => {
-        Schedule.find({}).then(res.send(result))
-    })
-
-    // newChannel.save((err, result) => {
-    //     if (err != null) {
-    //         console.log(err)
-    //         res.send("ERROR")
-    //     } else {
-    //         Schedule.find({}, (err, result) => {
-    //             if (err != null) {
-    //                 res.send("ERROR")
-    //             }
-    //             res.send(result)
-    //         })
-    //     }
-    // });
-    //jsonData.push(newChannel)
-    // console.log("Данные отправлены на сервер")
-    // res.json({ "message": "Вы размещаетесь на сервер" })
+app.get('/admin', (req, res) => {
+    res.sendFile(__dirname + '/public/static/html/admin.html')
+    console.log("Открыта админка")
 })
+
+app.post('/addchannel', AdminController.addNewChannel)
+app.delete('/deletechannel/:_id', AdminController.deleteChannel)
 

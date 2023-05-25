@@ -58,18 +58,6 @@ class Channel {
     }
 }
 
-function inputField() {
-    $('.main__bottom-section').append('\
-    <span> \
-        <input type="text" placeholder="Что хотите посмотреть?" class="input-field-add"> \
-    </span> \
-        <button class="input-field-button">Добавить</button> \
-    <style>\
-        input.text { \
-            width: 300px; \
-        }\
-    </style>')
-}
 
 function addNewChannel(scheduleObjects) {
     console.log(scheduleObjects)
@@ -78,6 +66,17 @@ function addNewChannel(scheduleObjects) {
         console.log("Мы отправили данные и получили ответ сервера!");
         console.log(res);
         scheduleObjects.push(newChannel)
+    })
+}
+
+function deleteChannel(scheduleObjects) {
+    console.log(scheduleObjects.pop()._id)
+    $.ajax({
+        url: 'deletechannel/' + scheduleObjects.pop()._id,
+        type: 'DELETE',
+        contentType: 'application/json'
+    }).done(function(res) {
+        console.log(res)
     })
 }
 
@@ -128,30 +127,14 @@ $(document).ready(() => {
         }
 
         console.log(channelInfo)
-        
-        // const firstChannel = new Channel('first-channel.html', 'first-channel-icon.png', yesterdayChannels[0]);
-        // const russiaOneChannel = new Channel('russia-1-channel.html', 'Russia-one-icon.png', yesterdayChannels[1]);
-        // const stsChannel = new Channel('sts-channel.html', 'Logo_СТС_23-10-2017.png', yesterdayChannels[2]);
 
         $('.yesterday-item').on('click', () => {
             $('.grid-container').empty()
-
-            // const firstChannelSchedule = new Schedule(firstChannel, yesterdayScheduleTime[0], yesterdayScheduleItems[0])
-            // const russiaOneChannelSchedule = new Schedule(russiaOneChannel, yesterdayScheduleTime[1], yesterdayScheduleItems[1])
-            // const stsChannelSchedule = new Schedule(stsChannel, yesterdayScheduleTime[2], yesterdayScheduleItems[2])
 
             channelInfo.forEach(element => {
                 element.setSchedule(element.getHTML())
                 console.log(element)
             })
-
-            // firstChannelSchedule.setSchedule(firstChannelSchedule.getHTML())
-            // russiaOneChannelSchedule.setSchedule(russiaOneChannelSchedule.getHTML())
-            // stsChannelSchedule.setSchedule(stsChannelSchedule.getHTML())
-
-            // $('.input-field-button').on('click', function() {
-            //     addNewChannel(scheduleObjects)
-            // })
         })
 
         $('.tomorrow-item').on('click', () => {
@@ -165,18 +148,29 @@ $(document).ready(() => {
             stsChannelSchedule.setSchedule(stsChannelSchedule.getHTML())
         })
 
-        $('.input-field-button').on('click', function() {
+        $('.input-field-button-add').on('click', function() {
+            console.log("Нажал добавить!!!")
             addNewChannel(scheduleObjects)
         })
+
+        $('.input-field-button-delete').on('click', function() {
+            console.log("Нажал!!!")
+            deleteChannel(scheduleObjects)
+        })
+
+        // $('.admin').on('click', function() {
+        //     //$.get('admin')
+        //     //inputField()
+        // })
 
         channelInfo.forEach(element => {
             element.setSchedule(element.getHTML())
             console.log(element)
         })
+
+        // $('.admin').on('click', function() {
+        //     //$.get('/admin')
+        //     inputField()
+        // })
     })
-
-    inputField()
-
-    //$('.main__bottom-section').append('<h2>Hello World</h2>')
-    //$('.input-field-button').on('click', addNewChannel)
 }) 
